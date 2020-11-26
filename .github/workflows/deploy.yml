@@ -1,0 +1,25 @@
+
+
+name: Deploying_website
+
+
+on:
+ 
+  push:
+    branches: 
+      -  master
+
+jobs:
+  build:
+    name: Deploying_website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        uses: action/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - name: Setup Surge
+        run: npm install --global surge
+      - name: execute
+        run: surge./firstwebsite0001.surge.sh --token ${{ secrets.PROJECTSECRET}}
